@@ -10,7 +10,7 @@ namespace SpinelTest.Services
         Task<CategoryDto> GetById(int id);
         Task<List<CategoryDto>> GetAll();
         Task<bool> AddUpdate(int? id, CategoryDto student);
-        Task<bool> Delete(int id);
+        Task Delete(int id);
         Task<bool> CheckIfCodeExist(string code, int? id);
         Task<List<LookupDto>> GetByCode(string code);
     }
@@ -78,7 +78,6 @@ namespace SpinelTest.Services
             return true;
         }
 
-
         public async Task<bool> CheckIfCodeExist(string code, int? id)
         {
             var isExisting = await _dBContext.Category.Where(c => c.Code == code && (id != null ? c.Id != id : true) && c.IsDeleted == false).FirstOrDefaultAsync();
@@ -86,16 +85,11 @@ namespace SpinelTest.Services
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task Delete(int id)
         {
-            var existingCategory = await _dBContext.Category
-                            .Where(s => s.Id == id)
-                            .FirstOrDefaultAsync();
-            if (existingCategory == null) return false;
-            var deletedCategory = _dBContext.Category.Remove(existingCategory);
+            var category = await _dBContext.Category.Where(d => d.Id == id).FirstOrDefaultAsync();
+            category.IsDeleted = true;
             _dBContext.SaveChanges();
-            if (deletedCategory == null) return false;
-            return true;
         }
     }
 }

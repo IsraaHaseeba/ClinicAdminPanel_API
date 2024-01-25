@@ -11,7 +11,7 @@ namespace SpinelTest.Services
         Task<DoctorDto> GetById(int id);
         Task<List<DoctorDto>> GetAll();
         Task<bool> AddUpdate(int? id, DoctorDto student);
-        Task<bool> Delete(int id);
+        Task Delete(int id);
     }
     public class DoctorServices : IDoctorServices
     {
@@ -30,7 +30,6 @@ namespace SpinelTest.Services
                 .Where(i => i.IsDeleted == false)
                 .Include(d => d.Specification)
                 .Include(d => d.Location)
-                .Include(d => d.Visits)
                 .ToListAsync();
             return _mapper.Map<List<DoctorDto>>(doctors);
         }
@@ -41,10 +40,16 @@ namespace SpinelTest.Services
                 .Where(s => s.Id == id && s.IsDeleted == false)
                 .Include(d => d.Specification)
                 .Include(d => d.Location)
-                .Include(d => d.Visits)
                 .FirstOrDefaultAsync();
             if (doctor == null) { return null; }
             return _mapper.Map<DoctorDto>(doctor);
+        }
+
+        public async Task Delete(int id)
+        {
+            var doctor = await _dBContext.Doctor.Where(d => d.Id == id).FirstOrDefaultAsync();
+            doctor.IsDeleted = true;
+            _dBContext.SaveChanges();
         }
 
         public async Task<bool> AddUpdate(int? id, DoctorDto doctor)
@@ -73,19 +78,6 @@ namespace SpinelTest.Services
             {
                 return false;
             }
-
-            return true;
-        }
-
-        public async Task<bool> Delete(int id)
-        {
-            var existingDoctor = await _dBContext.Doctor
-                            .Where(s => s.Id == id)
-                            .FirstOrDefaultAsync();
-            if (existingDoctor == null) return false;
-            var deletedDoctor = _dBContext.Doctor.Remove(existingDoctor);
-            _dBContext.SaveChanges();
-            if (deletedDoctor == null) return false;
             return true;
         }
     }

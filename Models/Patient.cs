@@ -3,7 +3,6 @@ using SpinelTest.DTOs;
 
 namespace SpinelTest.Models
 {
-    [AutoMap(typeof(PatientDto))]
     public class Patient
     {
         public int Id { get; set; }

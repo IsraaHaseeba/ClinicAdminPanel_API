@@ -88,6 +88,33 @@
           }
         }
       },
+      "Magic.AutoMapper/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "12.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.1/Magic.AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Magic.AutoMapper.dll": {}
+        }
+      },
+      "Magic.AutoMapper.Extensions.Microsoft.DependencyInjection/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "12.0.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
+          "Magic.AutoMapper": "1.1.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Magic.AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Magic.AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
         "type": "package",
         "compile": {
@@ -1680,6 +1707,30 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Magic.AutoMapper/1.1.0": {
+      "sha512": "bOEFh5PJU/fFtnldKc8keuPkwUiqk2AOIsQ7MMPiRxoQtd4uNAi2w1YAwQhaAtSh+eYr5EluzUxqZKOwmJhnug==",
+      "type": "package",
+      "path": "magic.automapper/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.1/Magic.AutoMapper.dll",
+        "magic.automapper.1.1.0.nupkg.sha512",
+        "magic.automapper.nuspec"
+      ]
+    },
+    "Magic.AutoMapper.Extensions.Microsoft.DependencyInjection/1.1.0": {
+      "sha512": "M/s4/7WZUA5Qbdl1Uxby5cVMyKQTskkCODzySrF0BKPXexdbUE3laz/WZvjskd4HJ/mDNty7cZGdt9Gy/8WmBw==",
+      "type": "package",
+      "path": "magic.automapper.extensions.microsoft.dependencyinjection/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netcoreapp3.1/Magic.AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
+        "magic.automapper.extensions.microsoft.dependencyinjection.1.1.0.nupkg.sha512",
+        "magic.automapper.extensions.microsoft.dependencyinjection.nuspec"
       ]
     },
     "Microsoft.Bcl.AsyncInterfaces/6.0.0": {
@@ -4496,6 +4547,7 @@
     "net8.0": [
       "AutoMapper >= 12.0.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
+      "Magic.AutoMapper.Extensions.Microsoft.DependencyInjection >= 1.1.0",
       "Microsoft.EntityFrameworkCore >= 8.0.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 8.0.1",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.1",
@@ -4549,6 +4601,10 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[12.0.1, )"
+          },
+          "Magic.AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[1.1.0, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",

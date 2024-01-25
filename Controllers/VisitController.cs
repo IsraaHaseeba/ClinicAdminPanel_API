@@ -38,10 +38,9 @@ namespace SpinelTest.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<ActionResult<bool>> Delete(int id)
+        public async Task Delete(int id)
         {
-            var isDeleted = await _visitService.Delete(id);
-            return Ok(isDeleted);
+            await _visitService.Delete(id);
         }
     }
 }

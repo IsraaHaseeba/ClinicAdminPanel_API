@@ -30,6 +30,13 @@ namespace SpinelTest.Controllers
             return Ok(lookups);
         }
 
+        [HttpGet("GetLookupsByCategory")]
+        public async Task<ActionResult<List<LookupDto>>> GetLookupsByCategory(int id)
+        {
+            var lookups = await _lookupService.GetLookupsByCategory(id);
+            return lookups;
+        }
+
         [HttpPost("AddUpdate")]
         public async Task<ActionResult<bool>> AddUpdate(int? id, LookupDto lookup)
         {
@@ -38,10 +45,9 @@ namespace SpinelTest.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<ActionResult<bool>> Delete(int id)
+        public async Task Delete(int id)
         {
-            var isDeleted = await _lookupService.Delete(id);
-            return Ok(isDeleted);
+            await _lookupService.Delete(id);
         }
     }
 }

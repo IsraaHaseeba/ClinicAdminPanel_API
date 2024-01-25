@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using SpinelTest.DTOs;
 using SpinelTest.Models;
@@ -10,7 +11,8 @@ namespace SpinelTest.Services
         Task<LookupDto> GetById(int id);
         Task<List<LookupDto>> GetAll();
         Task<bool> AddUpdate(int? id, LookupDto student);
-        Task<bool> Delete(int id);
+        Task<List<LookupDto>> GetLookupsByCategory(int id);
+        Task Delete(int id);
     }
     public class LookupService : ILookupService
     {
@@ -24,21 +26,24 @@ namespace SpinelTest.Services
         }
         public async Task<List<LookupDto>> GetAll()
         {
-            var lookups = await _dBContext.Lookup
-                .Where(i => i.IsDeleted == false)
-                .Include(s => s.Category)
-                .ToListAsync();
-            return _mapper.Map<List<LookupDto>>(lookups);
+            var query = _dBContext.Lookup
+                .Where(i => i.IsDeleted == false);
+            var lookups = _mapper.ProjectTo<LookupDto>(query).ToList();
+            return lookups;
         }
 
         public async Task<LookupDto> GetById(int id)
         {
             var lookup = await _dBContext.Lookup
                 .Where(s => s.Id == id && s.IsDeleted == false)
-                .Include(s => s.Category)
                 .FirstOrDefaultAsync();
-            if (lookup == null) { return null; }
             return _mapper.Map<LookupDto>(lookup);
+        }
+
+        public async Task<List<LookupDto>> GetLookupsByCategory(int id)
+        {
+            var lookups = await _dBContext.Lookup.Where(l => l.CategoryId == id && l.IsDeleted == false).Include(l => l.Category).ToListAsync();
+            return _mapper.Map<List<LookupDto>>(lookups);
         }
 
         public async Task<bool> AddUpdate(int? id, LookupDto lookup)
@@ -67,16 +72,11 @@ namespace SpinelTest.Services
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task Delete(int id)
         {
-            var existingLookup = await _dBContext.Lookup
-                            .Where(s => s.Id == id)
-                            .FirstOrDefaultAsync();
-            if (existingLookup == null) return false;
-            var deletedLookup = _dBContext.Lookup.Remove(existingLookup);
+            var lookup = await _dBContext.Lookup.Where(d => d.Id == id).FirstOrDefaultAsync();
+            lookup.IsDeleted = true;
             _dBContext.SaveChanges();
-            if (deletedLookup == null) return false;
-            return true;
         }
     }
 

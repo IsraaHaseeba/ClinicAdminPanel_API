@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpinelTest.Models
 {
-    [AutoMap(typeof(DoctorDto))]
     public class Doctor
     {
         public int Id { get; set; }

@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SpinelTest.Models
 {
-    [AutoMap(typeof(CategoryDto))]
     public class Category
     {
         [Key]

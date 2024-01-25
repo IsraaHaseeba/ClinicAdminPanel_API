@@ -4,8 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpinelTest.Models
 {
-
-    [AutoMap(typeof(LookupDto))]
     public class Lookup
     {
         public int Id { get; set; }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SpinelTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+652cb0bc567a2b345c6b960632145b6938285b33")]
 [assembly: System.Reflection.AssemblyProductAttribute("SpinelTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SpinelTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

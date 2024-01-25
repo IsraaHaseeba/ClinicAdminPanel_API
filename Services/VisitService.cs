@@ -10,7 +10,7 @@ namespace SpinelTest.Services
         Task<VisitDto> GetById(int id);
         Task<List<VisitDto>> GetAll();
         Task<bool> AddUpdate(int? id, VisitDto student);
-        Task<bool> Delete(int id);
+        Task Delete(int id);
     }
     public class VisitService : IVisitService
     {
@@ -67,16 +67,11 @@ namespace SpinelTest.Services
 
             return true;
         }
-        public async Task<bool> Delete(int id)
+        public async Task Delete(int id)
         {
-            var existingVisit = await _dBContext.Visit
-                            .Where(s => s.Id == id)
-                            .FirstOrDefaultAsync();
-            if (existingVisit == null) return false;
-            var deletedVisit = _dBContext.Visit.Remove(existingVisit);
+            var visit = await _dBContext.Visit.Where(d => d.Id == id).FirstOrDefaultAsync();
+            visit.IsDeleted = true;
             _dBContext.SaveChanges();
-            if (deletedVisit == null) return false;
-            return true;
         }
     }
 }

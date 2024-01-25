@@ -10,7 +10,7 @@ namespace SpinelTest.Services
         Task<PatientDto> GetById(int id);
         Task<List<PatientDto>> GetAll();
         Task<bool> AddUpdate(int? id, PatientDto student);
-        Task<bool> Delete(int id);
+        Task Delete(int id);
     }
     public class PatientService : IPatientService
     {
@@ -67,16 +67,11 @@ namespace SpinelTest.Services
             return true;
         }
 
-        public async Task<bool> Delete(int id)
+        public async Task Delete(int id)
         {
-            var existingPatient = await _dBContext.Patient
-                            .Where(s => s.Id == id)
-                            .FirstOrDefaultAsync();
-            if (existingPatient == null) return false;
-            var deletedPatient = _dBContext.Patient.Remove(existingPatient);
+            var patient = await _dBContext.Patient.Where(d => d.Id == id).FirstOrDefaultAsync();
+            patient.IsDeleted = true;
             _dBContext.SaveChanges();
-            if (deletedPatient == null) return false;
-            return true;
         }
     }
 }

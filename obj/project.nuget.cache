@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lNxT/+5LJpaPr/sNIjkWHo9OneRUY5hYL0LVQ8nx5uhfLveVGPZOPTQZLLwbMXVoNC+OceMC5VsZx4trDNMbBg==",
+  "dgSpecHash": "D5/wIiN/pss3e8R/+eElrKHdckXaKCJSChl9HbTx3o0vN9sDbvnfmZim0kbjYIen4JRDAI4MV8og1rGOw1XSXw==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\source\\repos\\SpinelTest\\SpinelTest\\SpinelTest.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,8 @@
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\magic.automapper\\1.1.0\\magic.automapper.1.1.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\magic.automapper.extensions.microsoft.dependencyinjection\\1.1.0\\magic.automapper.extensions.microsoft.dependencyinjection.1.1.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.codeanalysis.common\\4.5.0\\microsoft.codeanalysis.common.4.5.0.nupkg.sha512",

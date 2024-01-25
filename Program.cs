@@ -1,12 +1,12 @@
 using AutoMapper;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using SpinelTest.Models;
 using SpinelTest.Services;
 using System.Text.Json.Serialization;
 
+
 var builder = WebApplication.CreateBuilder(args);
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins"; 
 
 builder.Services.AddControllers().AddJsonOptions(x =>
    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -17,6 +17,7 @@ builder.Services.AddDbContext<DBContext>(options => options.UseSqlServer(connect
 
 // Add services to the container.
 builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddScoped<IDoctorServices, DoctorServices>();
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IVisitService, VisitService>();
