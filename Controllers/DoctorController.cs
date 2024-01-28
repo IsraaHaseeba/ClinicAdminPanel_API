@@ -24,7 +24,7 @@ namespace SpinelTest.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<DoctorDto>>> GetAll()
+        public async Task<ActionResult<List<DoctorListItemDto>>> GetAll()
         {
             var doctors = await _doctorServices.GetAll();
             if (doctors == null) { return NotFound(); }

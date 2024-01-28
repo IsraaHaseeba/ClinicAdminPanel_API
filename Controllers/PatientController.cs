@@ -21,7 +21,7 @@ namespace SpinelTest.Controllers
             if (patient == null) { return NotFound(); }
             return Ok(patient);
         }
-
+        
         [HttpGet("GetAll")]
         public async Task<ActionResult<List<PatientDto>>> GetAll()
         {

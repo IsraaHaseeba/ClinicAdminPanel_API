@@ -9,7 +9,7 @@ namespace SpinelTest.Services
     public interface IDoctorServices
     {
         Task<DoctorDto> GetById(int id);
-        Task<List<DoctorDto>> GetAll();
+        Task<List<DoctorListItemDto>> GetAll();
         Task<bool> AddUpdate(int? id, DoctorDto student);
         Task Delete(int id);
     }
@@ -24,25 +24,20 @@ namespace SpinelTest.Services
             _mapper = mapper;
         }
 
-        public async Task<List<DoctorDto>> GetAll()
+        public async Task<List<DoctorListItemDto>> GetAll()
         {
-            var doctors = await _dBContext.Doctor
-                .Where(i => i.IsDeleted == false)
-                .Include(d => d.Specification)
-                .Include(d => d.Location)
-                .ToListAsync();
-            return _mapper.Map<List<DoctorDto>>(doctors);
+            var query = _dBContext.Doctor
+                .Where(i => i.IsDeleted == false);
+            var doctors = _mapper.ProjectTo<DoctorListItemDto>(query).ToList();
+            return doctors;
         }
 
         public async Task<DoctorDto> GetById(int id)
         {
-            var doctor = await _dBContext.Doctor
-                .Where(s => s.Id == id && s.IsDeleted == false)
-                .Include(d => d.Specification)
-                .Include(d => d.Location)
-                .FirstOrDefaultAsync();
-            if (doctor == null) { return null; }
-            return _mapper.Map<DoctorDto>(doctor);
+            var query = _dBContext.Doctor
+                .Where(s => s.Id == id && s.IsDeleted == false);
+            var doctor = _mapper.ProjectTo<DoctorDto>(query).FirstOrDefault();
+            return doctor;
         }
 
         public async Task Delete(int id)

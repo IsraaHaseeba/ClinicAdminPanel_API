@@ -15,4 +15,14 @@ namespace SpinelTest.DTOs
         public DateTime? FromWorkingHour { get; set; }
         public DateTime? ToWorkingHour { get; set; }
     }
+
+    public class DoctorListItemDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string? SpecificationName { get; set; }
+        public string? LocationName { get; set; }
+        public DateTime? FromWorkingHour { get; set; }
+        public DateTime? ToWorkingHour { get; set; }
+    }
 }

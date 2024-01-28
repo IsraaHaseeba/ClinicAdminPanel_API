@@ -23,7 +23,7 @@ namespace SpinelTest.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<LookupDto>>> GetAll()
+        public async Task<ActionResult<List<LookupListItemDto>>> GetAll()
         {
             var lookups = await _lookupService.GetAll();
             if (lookups == null) { return NotFound(); }
@@ -31,9 +31,9 @@ namespace SpinelTest.Controllers
         }
 
         [HttpGet("GetLookupsByCategory")]
-        public async Task<ActionResult<List<LookupDto>>> GetLookupsByCategory(int id)
+        public async Task<ActionResult<List<LookupListItemDto>>> GetLookupsByCategory(string code)
         {
-            var lookups = await _lookupService.GetLookupsByCategory(id);
+            var lookups = await _lookupService.GetLookupsByCategory(code);
             return lookups;
         }
 

@@ -3,15 +3,16 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using SpinelTest.DTOs;
 using SpinelTest.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SpinelTest.Services
 {
     public interface ILookupService
     {
-        Task<LookupDto> GetById(int id);
-        Task<List<LookupDto>> GetAll();
+        Task<LookupDto>? GetById(int id);
+        Task<List<LookupListItemDto>> GetAll();
         Task<bool> AddUpdate(int? id, LookupDto student);
-        Task<List<LookupDto>> GetLookupsByCategory(int id);
+        Task<List<LookupListItemDto>> GetLookupsByCategory(string code);
         Task Delete(int id);
     }
     public class LookupService : ILookupService
@@ -24,26 +25,27 @@ namespace SpinelTest.Services
             _dBContext = dbContex;
             _mapper = mapper;
         }
-        public async Task<List<LookupDto>> GetAll()
+        public async Task<List<LookupListItemDto>> GetAll()
         {
             var query = _dBContext.Lookup
                 .Where(i => i.IsDeleted == false);
-            var lookups = _mapper.ProjectTo<LookupDto>(query).ToList();
+            var lookups = _mapper.ProjectTo<LookupListItemDto>(query).ToList();
             return lookups;
         }
 
-        public async Task<LookupDto> GetById(int id)
+        public async Task<LookupDto>? GetById(int id)
         {
-            var lookup = await _dBContext.Lookup
-                .Where(s => s.Id == id && s.IsDeleted == false)
-                .FirstOrDefaultAsync();
-            return _mapper.Map<LookupDto>(lookup);
+            var query = _dBContext.Lookup
+                        .Where(s => s.Id == id && s.IsDeleted == false);
+            var lookup = _mapper.ProjectTo<LookupDto>(query).FirstOrDefault();
+            return lookup;
         }
 
-        public async Task<List<LookupDto>> GetLookupsByCategory(int id)
+        public async Task<List<LookupListItemDto>> GetLookupsByCategory(string code)
         {
-            var lookups = await _dBContext.Lookup.Where(l => l.CategoryId == id && l.IsDeleted == false).Include(l => l.Category).ToListAsync();
-            return _mapper.Map<List<LookupDto>>(lookups);
+            var query = _dBContext.Lookup.Where(l => l.Category.Code == code && l.IsDeleted == false);
+            var lookups = _mapper.ProjectTo<LookupListItemDto>(query).ToList();
+            return lookups;
         }
 
         public async Task<bool> AddUpdate(int? id, LookupDto lookup)

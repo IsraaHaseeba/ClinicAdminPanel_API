@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SpinelTest.DTOs;
 using SpinelTest.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SpinelTest.Services
 {
@@ -12,7 +13,6 @@ namespace SpinelTest.Services
         Task<bool> AddUpdate(int? id, CategoryDto student);
         Task Delete(int id);
         Task<bool> CheckIfCodeExist(string code, int? id);
-        Task<List<LookupDto>> GetByCode(string code);
     }
     public class CategoryService : ICategoryService
     {
@@ -25,29 +25,18 @@ namespace SpinelTest.Services
         }
         public async Task<List<CategoryDto>> GetAll()
         {
-            var categories = await _dBContext.Category
-                 .Where(i => i.IsDeleted == false)
-                .ToListAsync();
-            return _mapper.Map<List<CategoryDto>>(categories);
+            var query = _dBContext.Category
+                 .Where(i => i.IsDeleted == false);
+            var categories = _mapper.ProjectTo<CategoryDto>(query).ToList();
+            return categories;
         }
 
         public async Task<CategoryDto> GetById(int id)
         {
-            var category = await _dBContext.Category
-                .Where(s => s.Id == id && s.IsDeleted == false)
-                .FirstOrDefaultAsync();
-            if (category == null) { return null; }
-            return _mapper.Map<CategoryDto>(category);
-        }
-
-        public async Task<List<LookupDto>> GetByCode(string code)
-        {
-            var category = await _dBContext.Category
-                .Where(s => s.Code == code && s.IsDeleted == false)
-                .Include(c => c.Lookups)
-                .FirstOrDefaultAsync();
-            if (category == null) { return null; }
-            return _mapper.Map<List<LookupDto>>(category.Lookups);
+            var query = _dBContext.Category
+                .Where(s => s.Id == id && s.IsDeleted == false);
+            var category = _mapper.ProjectTo<CategoryDto>(query).FirstOrDefault();
+            return category;
         }
 
         public async Task<bool> AddUpdate(int? id, CategoryDto category)

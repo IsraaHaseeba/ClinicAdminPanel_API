@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\source\\repos\\SpinelTest\\SpinelTest\\SpinelTest.csproj": {}
+    "C:\\Users\\HP\\source\\repos\\ClinicAdminPanel_API\\SpinelTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\source\\repos\\SpinelTest\\SpinelTest\\SpinelTest.csproj": {
+    "C:\\Users\\HP\\source\\repos\\ClinicAdminPanel_API\\SpinelTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\source\\repos\\SpinelTest\\SpinelTest\\SpinelTest.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\source\\repos\\ClinicAdminPanel_API\\SpinelTest.csproj",
         "projectName": "SpinelTest",
-        "projectPath": "C:\\Users\\user\\source\\repos\\SpinelTest\\SpinelTest\\SpinelTest.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\source\\repos\\SpinelTest\\SpinelTest\\obj\\",
+        "projectPath": "C:\\Users\\HP\\source\\repos\\ClinicAdminPanel_API\\SpinelTest.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\source\\repos\\ClinicAdminPanel_API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

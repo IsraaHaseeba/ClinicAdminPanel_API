@@ -37,13 +37,6 @@ namespace SpinelTest.Controllers
             return Ok(isExisting);
         }
 
-        [HttpGet("GetByCode")]
-        public async Task<ActionResult<List<LookupDto>>> GetByCode(string code)
-        {
-            var lookups = await _categoryService.GetByCode(code);
-            return lookups;
-        }
-
         [HttpPost("AddUpdate")]
         public async Task<ActionResult<bool>> AddUpdate(int? id, CategoryDto doctor)
         {

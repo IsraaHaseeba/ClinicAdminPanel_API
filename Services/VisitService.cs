@@ -8,7 +8,7 @@ namespace SpinelTest.Services
     public interface IVisitService
     {
         Task<VisitDto> GetById(int id);
-        Task<List<VisitDto>> GetAll();
+        Task<List<VisitListItemDto>> GetAll();
         Task<bool> AddUpdate(int? id, VisitDto student);
         Task Delete(int id);
     }
@@ -21,23 +21,20 @@ namespace SpinelTest.Services
             _dBContext = dbContex;
             _mapper = mapper;
         }
-        public async Task<List<VisitDto>> GetAll()
+        public async Task<List<VisitListItemDto>> GetAll()
         {
-            var visits = await _dBContext.Visit
-                .Where(i => i.IsDeleted == false)
-                .Include(v => v.Doctor)
-                .Include(v => v.Patient)
-                .ToListAsync();
-            return _mapper.Map<List<VisitDto>>(visits);
+            var query = _dBContext.Visit
+                .Where(i => i.IsDeleted == false);
+            var visits = _mapper.ProjectTo<VisitListItemDto>(query).ToList();
+            return visits;
         }
 
         public async Task<VisitDto> GetById(int id)
         {
-            var visit = await _dBContext.Visit
-                .Where(s => s.Id == id && s.IsDeleted == false)
-                .FirstOrDefaultAsync();
-            if (visit == null) { return null; }
-            return _mapper.Map<VisitDto>(visit);
+            var query = _dBContext.Visit
+                .Where(s => s.Id == id && s.IsDeleted == false);
+            var visit = _mapper.ProjectTo<VisitDto>(query).FirstOrDefault();
+            return visit;
         }
 
         public async Task<bool> AddUpdate(int? id, VisitDto visit)

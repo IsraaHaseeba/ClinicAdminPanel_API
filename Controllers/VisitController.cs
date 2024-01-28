@@ -23,7 +23,7 @@ namespace SpinelTest.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<VisitDto>>> GetAll()
+        public async Task<ActionResult<List<VisitListItemDto>>> GetAll()
         {
             var visits = await _visitService.GetAll();
             if (visits == null) { return NotFound(); }

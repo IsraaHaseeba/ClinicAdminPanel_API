@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SpinelTest.DTOs;
 using SpinelTest.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SpinelTest.Services
 {
@@ -23,19 +24,18 @@ namespace SpinelTest.Services
         }
         public async Task<List<PatientDto>> GetAll()
         {
-            var patients = await _dBContext.Patient
-                .Where(i => i.IsDeleted == false)
-                .ToListAsync();
-            return _mapper.Map<List<PatientDto>>(patients);
+            var query = _dBContext.Patient
+                .Where(i => i.IsDeleted == false);
+            var patients = _mapper.ProjectTo<PatientDto>(query).ToList();
+            return patients;
         }
 
         public async Task<PatientDto> GetById(int id)
         {
-            var patient = await _dBContext.Patient
-                .Where(s => s.Id == id && s.IsDeleted == false)
-                .FirstOrDefaultAsync();
-            if (patient == null) { return null; }
-            return _mapper.Map<PatientDto>(patient);
+            var query = _dBContext.Patient
+                .Where(s => s.Id == id && s.IsDeleted == false);
+            var patients = _mapper.ProjectTo<PatientDto>(query).FirstOrDefault();
+            return patients;
         }
 
         public async Task<bool> AddUpdate(int? id, PatientDto patient)
