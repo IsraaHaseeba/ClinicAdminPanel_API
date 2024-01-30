@@ -14,7 +14,7 @@ namespace SpinelTest.Controllers
             _categoryService = categoryService;
         }
 
-        [HttpGet("GetById")]
+        [HttpGet("GetById/{id}")]
         public async Task<ActionResult<CategoryDto>> GetById(int id)
         {
             var category = await _categoryService.GetById(id);
@@ -30,21 +30,21 @@ namespace SpinelTest.Controllers
             return Ok(categories);
         }
 
-        [HttpGet("CheckIfCodeExist")]
+        [HttpGet("CheckIfCodeExist/{code}/{id?}")]
         public async Task<ActionResult<bool>> CheckIfCodeExist(string code, int? id)
         {
             var isExisting = await _categoryService.CheckIfCodeExist(code, id);
             return Ok(isExisting);
         }
 
-        [HttpPost("AddUpdate")]
+        [HttpPost("AddUpdate/{id?}")]
         public async Task<ActionResult<bool>> AddUpdate(int? id, CategoryDto doctor)
         {
             var isAdded = await _categoryService.AddUpdate(id, doctor);
             return Ok(isAdded);
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{id}")]
         public async Task Delete(int id)
         {
             await _categoryService.Delete(id);

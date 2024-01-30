@@ -14,7 +14,7 @@ namespace SpinelTest.Controllers
             _visitService = visitService;
         }
 
-        [HttpGet("GetById")]
+        [HttpGet("GetById/{id}")]
         public async Task<ActionResult<VisitDto>> GetById(int id)
         {
             var visit = await _visitService.GetById(id);
@@ -30,14 +30,14 @@ namespace SpinelTest.Controllers
             return Ok(visits);
         }
 
-        [HttpPost("AddUpdate")]
+        [HttpPost("AddUpdate/{id?}")]
         public async Task<ActionResult<bool>> AddUpdate(int? id, VisitDto visit)
         {
             var isAdded = await _visitService.AddUpdate(id, visit);
             return Ok(isAdded);
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{id}")]
         public async Task Delete(int id)
         {
             await _visitService.Delete(id);
